@@ -1,0 +1,22 @@
+# OS system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.swp
+*.tmp
+*.bak
+
+# Python notebooks (optional if you don’t want to include them)
+*.ipynb_checkpoints/
+
+# Node modules (only if later you use JS frameworks like React)
+node_modules/
+
+# Build directories (if you ever use bundlers)
+dist/
+build/
+

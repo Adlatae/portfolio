@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aditi Chaudhary | Portfolio</title>
+  <style>
+    /* ========== GLOBAL STYLES ========== */
+    html {
+      scroll-behavior: smooth; /* smooth scrolling for nav links */
+    }
+    body {
+      margin: 0;
+      font-family: 'Times New Roman', serif;
+      background: #E6E6FA; /* Light lavender */
+      overflow-x: hidden;
+      color: #111;  /* dark text for body */
+      line-height: 1.6;
+    }
+
+    /* Animated lavender texture */
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 20%, transparent 60%) repeat;
+      background-size: 250px 250px;
+      animation: floatBubbles 80s linear infinite;
+      z-index: -1;
+    }
+    body::after {
+      animation-duration: 120s;
+      opacity: 0.5;
+    }
+    @keyframes floatBubbles {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-300px, -500px); }
+    }
+
+    section {
+      padding: 2rem 0rem;
+      max-width: 1000px;
+      margin: auto;
+      animation: fadeSlideUp 1s ease both;
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2, h3 {
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #222; /* default dark */
+    }
+
+    /* ========== HEADER ========== */
+    header {
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* White header name with shadow */
+    header h2 {
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      margin: 0;
+    }
+
+    /* Navigation links - light blue */
+    header nav a {
+      color: #E6E6FA; /* light blue links */
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    header nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #E6E6FA; /* deep lavender underline on hover */
+      transition: width 0.3s ease;
+    }
+    header nav a:hover {
+      color: #E626FA; /* color changes on hover */
+    }
+    header nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ========== CARDS ========== */
+    .card {
+      background: #fff;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      border-radius: 14px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+    }
+
+    pre {
+      background: #222;
+      color: #f5f5dc;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: rgba(0,0,0,0.8);
+      color: #f5f5dc;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>Aditi Chaudhary</h2>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#python">Python</a>
+    <a href="#gromacs">GROMACS</a>
+    <a href="#publications">Publications</a>
+    <a href="#notes">Notes</a>
+    <a href="#experience">Education</a>
+    <a href="#volunteer">Volunteer</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="about">
+  <h1>About Me</h1>
+  <p>Chemistry graduate (BHU) and Master’s in Chemistry (IIT ISM Dhanbad, 2025), specializing in computational and theoretical chemistry. Skilled in molecular dynamics simulations, enhanced sampling, and drug discovery approaches. Aspiring to pursue doctoral research at the interface of chemistry, biology, and computational science to contribute to biomedical innovation.</p>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Programming:</strong> Python (NumPy, Pandas, Matplotlib, Seaborn, Scikit-Learn)</li>
+      <li><strong>Scripting:</strong> Ubuntu (Bash, TCL), Vim</li>
+      <li><strong>Molecular Simulation:</strong> AMBER, NAMD, GROMACS</li>
+      <li><strong>Visualization:</strong> VMD, PyMOL, MODELLER</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="card">
+    <h3>M.Sc. Thesis – IIT ISM Dhanbad</h3>
+    <p>Investigated spinach nitrate reductase regulation by 14-3-3 ω using MD simulations, free energy calculations, and bioinformatics. Submitted to JCIM.</p>
+  </div>
+  <div class="card">
+    <h3>Summer Internship – IISER Bhopal</h3>
+    <p>Simulated lysozyme in water using GROMACS. Modeled GPCR (7S0F) with MODELLER & CHARMM-GUI. Analyzed protein stability and lipid–protein interactions.</p>
+  </div>
+</section>
+
+<section id="python">
+  <h2>Python Codes for Plots</h2>
+  <div class="card">
+    <pre>
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+plt.plot(x, y, label="sin(x)")
+plt.xlabel("x values"); plt.ylabel("sin(x)")
+plt.legend(); plt.show()
+    </pre>
+  </div>
+  <div class="card">
+    <pre>
+import seaborn as sns, numpy as np, matplotlib.pyplot as plt
+
+data = np.random.normal(size=100)
+sns.histplot(data, kde=True, color="lavender")
+plt.title("Distribution Plot with Seaborn")
+plt.show()
+    </pre>
+  </div>
+</section>
+<section id="gromacs">
+  <h2>GROMACS Simulation: Lysozyme in Water</h2>
+  <div class="card">
+    <pre>
+# Full GROMACS Workflow
+gmx pdb2gmx -f lysozyme.pdb -o processed.gro -water spce
+gmx editconf -f processed.gro -o newbox.gro -c -d 1.0 -bt cubic
+gmx solvate -cp newbox.gro -cs spc216.gro -o solvated.gro -p topol.top
+gmx grompp -f ions.mdp -c solvated.gro -p topol.top -o ions.tpr
+gmx genion -s ions.tpr -o solv_ions.gro -p topol.top -pname NA -nname CL -neutral
+gmx grompp -f em.mdp -c solv_ions.gro -p topol.top -o em.tpr
+gmx mdrun -v -deffnm em
+gmx grompp -f nvt.mdp -c em.gro -p topol.top -o nvt.tpr
+gmx mdrun -deffnm nvt
+    </pre>
+    <p>Here is my full presentation on Lysozyme in Water, including all procedures:</p>
+    <!-- Embed PDF -->
+    <iframe src="./lysozyme_in_water.pdf" width="100%" height="600px"></iframe>
+    <!-- Download link -->
+    <p><a href="./lysozyme_in_water.pdf" target="_blank">Download Presentation</a></p>
+  </div>
+</section>
+
+
+<section id="publications">
+  <h2>Publications</h2>
+  <div class="card">
+    <p><strong>Submitted:</strong> Dual Allosteric and Orthosteric Inhibition of 14-3-3ζ–α-Synuclein Interaction: A Multiscale Simulation and Machine Learning Approach. Submitted to <i>Advanced Theory and Simulations</i>.</p>
+  </div>
+</section>
+<section id="notes">
+  <h2>Notes</h2>
+  <div class="card">
+    <p>This section is reserved for my personal notes related to General Chemistry, Computational Chemistry, or any other topics I’m working on. I will add content here gradually.</p>
+    <h3>Protein Notes</h3>
+    <p>What is protein?</p>
+    <iframe src="./What_is_protein.pdf" width="100%" height="600px"></iframe>
+    <p><a href="./What_is_protein.pdf" target="_blank">Download Notes PDF</a></p>
+  </div>
+</section>
+
+<section id="experience">
+  <h2>Education</h2>
+  <div class="card">
+    <h3>IIT ISM Dhanbad</h3>
+    <p>M.Sc. Chemistry (2023–2025), Thesis under Dr. Niladri Patra on protein–protein interactions.</p>
+  </div>
+  <div class="card">
+    <h3>BHU, Varanasi</h3>
+    <p>B.Sc. Chemistry (Hons.) (2020–2023)</p>
+  </div>
+</section>
+
+<section id="volunteer">
+  <h2>Volunteer Work</h2>
+  <div class="card">
+    <h3>Content Writer – Karma Jyoti (2023–2025)</h3>
+    <p>Created impactful  communication and outreach content for Karma Jyoti, a social welfare club at IIT ISM Dhanbad.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:akc469724@gmail.com">akc469724@gmail.com</a></p>
+  <p>LinkedIn: <a href="#">linkedin.com/in/aditi-chaudhary-akc469724</a></p>
+</section>
+
+<footer>
+  <p>© 2025 Aditi Chaudhary | Built with 💜</p>
+</footer>
+<!-- Back to Top Button -->
+<button id="backToTop" onclick="scrollToTop()">↑ Top</button>
+
+<script>
+  // Show button when scrolled down
+  const backToTop = document.getElementById("backToTop");
+  window.onscroll = function() {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      backToTop.style.display = "block";
+    } else {
+      backToTop.style.display = "none";
+    }
+  };
+
+  // Scroll to top smoothly
+  function scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+</script>
+
+<style>
+  #backToTop {
+    display: none; /* hidden by default */
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 100;
+    background-color: #8A2BE2; /* deep lavender */
+    color: #fff;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  #backToTop:hover {
+    background-color: #ADD8E6; /* light blue on hover */
+    transform: scale(1.1);
+  }
+</style>
+
+</body>
+</html>
+
