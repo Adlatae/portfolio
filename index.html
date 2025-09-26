@@ -7,18 +7,18 @@
   <style>
     /* ========== GLOBAL STYLES ========== */
     html {
-      scroll-behavior: smooth; /* smooth scrolling for nav links */
+      scroll-behavior: smooth;
     }
     body {
       margin: 0;
       font-family: 'Times New Roman', serif;
-      background: #E6E6FA; /* Light lavender */
+      background: #E6E6FA; /* Lavender */
       overflow-x: hidden;
-      color: #111;  /* dark text for body */
+      color: #111;
       line-height: 1.6;
     }
 
-    /* Animated lavender texture */
+    /* Floating lavender texture */
     body::before, body::after {
       content: "";
       position: fixed;
@@ -52,35 +52,40 @@
     h1, h2, h3 {
       font-weight: bold;
       margin-bottom: 1rem;
-      color: #222; /* default dark */
+      color: #222;
     }
 
     /* ========== HEADER ========== */
     header {
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.85);
       color: #fff;
-      padding: 1rem 1.5rem;
+      padding: 0.8rem 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       position: sticky;
       top: 0;
       z-index: 1000;
     }
+     header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff !important;   /* force white */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  white-space: nowrap;
+}
 
-    /* White header name with shadow */
-    header h2 {
-      color: white;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-      margin: 0;
+    header nav {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
     }
-
-    /* Navigation links - light blue */
     header nav a {
-      color: #E6E6FA; /* light blue links */
-      margin: 0 1rem;
+      color: #E6E6FA;
       text-decoration: none;
       font-weight: bold;
+      font-size: 0.95rem;
       position: relative;
       transition: color 0.3s ease;
     }
@@ -91,14 +96,25 @@
       height: 2px;
       bottom: -4px;
       left: 0;
-      background-color: #E6E6FA; /* deep lavender underline on hover */
+      background-color: #E6E6FA;
       transition: width 0.3s ease;
     }
     header nav a:hover {
-      color: #E626FA; /* color changes on hover */
+      color: #E626FA;
     }
     header nav a:hover::after {
       width: 100%;
+    }
+
+    /* Hamburger button */
+    #menuButton {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: white;
+      cursor: pointer;
+      margin-left: auto;
     }
 
     /* ========== CARDS ========== */
@@ -122,6 +138,12 @@
       border-radius: 8px;
       overflow-x: auto;
       font-size: 0.9rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    iframe {
+      max-width: 100%;
     }
 
     /* ========== FOOTER ========== */
@@ -133,7 +155,7 @@
       margin-top: 2rem;
     }
 
- /* --- Mobile Styles --- */
+    /* ========== MOBILE FIXES ========== */
     @media (max-width: 768px) {
       section { padding: 1.5rem 1rem; }
       h1 { font-size: 1.4rem; }
@@ -141,29 +163,61 @@
       h3 { font-size: 1rem; }
       .card { padding: 1rem; }
 
-      /* hide nav, show hamburger */
+      header {
+        padding: 0.6rem 0.8rem;
+      }
+      header h2 {
+        font-size: 1rem;
+      }
+
       header nav {
         display: none;
         flex-direction: column;
         width: 100%;
         background: rgba(0,0,0,0.95);
-        position: absolute;
-        top: 60px;
-        left: 0;
-        padding: 1rem;
+        padding: 0.5rem 0.8rem;
+        margin-top: 0.5rem;
+        border-radius: 6px;
       }
       header nav.open { display: flex; }
+      header nav a {
+        display: block;
+        padding: 0.5rem 0;
+        text-align: left;
+        font-size: 0.95rem;
+      }
       #menuButton { display: block; }
-      header nav a { padding: 0.6rem 0; }
     }
 
-</style>
+    /* Back-to-Top button */
+    #backToTop {
+      display: none;
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      z-index: 100;
+      background-color: #8A2BE2;
+      color: #fff;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    #backToTop:hover {
+      background-color: #ADD8E6;
+      transform: scale(1.1);
+    }
+  </style>
 </head>
 <body>
 
 <header>
   <h2>Aditi Chaudhary</h2>
-  <nav>
+  <button id="menuButton" aria-label="Toggle navigation">☰</button>
+  <nav id="mainNav">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
@@ -179,7 +233,7 @@
 
 <section id="about">
   <h1>About Me</h1>
-  <p>Chemistry graduate (BHU) and Master’s in Chemistry (IIT ISM Dhanbad, 2025), specializing in computational and theoretical chemistry. Skilled in molecular dynamics simulations, enhanced sampling, and drug discovery approaches. Aspiring to pursue doctoral research at the interface of chemistry, biology, and computational science to contribute to biomedical innovation.</p>
+  <p>Chemistry graduate (BHU) and Master’s in Chemistry (IIT ISM Dhanbad, 2025), specializing in computational and theoretical chemistry. Skilled in molecular dynamics simulations, enhanced sampling, and drug discovery approaches.</p>
 </section>
 
 <section id="skills">
@@ -188,7 +242,7 @@
     <ul>
       <li><strong>Programming:</strong> Python (NumPy, Pandas, Matplotlib, Seaborn, Scikit-Learn)</li>
       <li><strong>Scripting:</strong> Ubuntu (Bash, TCL), Vim</li>
-      <li><strong>Molecular Simulation:</strong> AMBER, NAMD, GROMACS</li>
+      <li><strong>Simulation:</strong> AMBER, NAMD, GROMACS</li>
       <li><strong>Visualization:</strong> VMD, PyMOL, MODELLER</li>
     </ul>
   </div>
@@ -198,16 +252,16 @@
   <h2>Projects</h2>
   <div class="card">
     <h3>M.Sc. Thesis – IIT ISM Dhanbad</h3>
-    <p>Investigated spinach nitrate reductase regulation by 14-3-3 ω using MD simulations, free energy calculations, and bioinformatics. Submitted to JCIM.</p>
+    <p>Investigated spinach nitrate reductase regulation by 14-3-3 ω using MD simulations, free energy calculations, and bioinformatics.</p>
   </div>
   <div class="card">
     <h3>Summer Internship – IISER Bhopal</h3>
-    <p>Simulated lysozyme in water using GROMACS. Modeled GPCR (7S0F) with MODELLER & CHARMM-GUI. Analyzed protein stability and lipid–protein interactions.</p>
+    <p>Simulated lysozyme in water using GROMACS. Modeled GPCR (7S0F) with MODELLER & CHARMM-GUI.</p>
   </div>
 </section>
 
 <section id="python">
-  <h2>Python Codes for Plots</h2>
+  <h2>Python Codes</h2>
   <div class="card">
     <pre>
 import numpy as np
@@ -232,11 +286,11 @@ plt.show()
     </pre>
   </div>
 </section>
+
 <section id="gromacs">
   <h2>GROMACS Simulation: Lysozyme in Water</h2>
   <div class="card">
     <pre>
-# Full GROMACS Workflow
 gmx pdb2gmx -f lysozyme.pdb -o processed.gro -water spce
 gmx editconf -f processed.gro -o newbox.gro -c -d 1.0 -bt cubic
 gmx solvate -cp newbox.gro -cs spc216.gro -o solvated.gro -p topol.top
@@ -247,29 +301,27 @@ gmx mdrun -v -deffnm em
 gmx grompp -f nvt.mdp -c em.gro -p topol.top -o nvt.tpr
 gmx mdrun -deffnm nvt
     </pre>
-    <p>Here is my full presentation on Lysozyme in Water, including all procedures:</p>
-    <!-- Embed PDF -->
-    <iframe src="./lysozyme_in_water.pdf" width="100%" height="600px"></iframe>
-    <!-- Download link -->
-    <p><a href="./lysozyme_in_water.pdf" target="_blank">Download Presentation</a></p>
+    <div class="responsive-iframe">
+      <iframe src="./lysozyme_in_water.pdf" title="Lysozyme Presentation"></iframe>
+    </div>
   </div>
 </section>
-
 
 <section id="publications">
   <h2>Publications</h2>
   <div class="card">
-    <p><strong>Submitted:</strong> Dual Allosteric and Orthosteric Inhibition of 14-3-3ζ–α-Synuclein Interaction: A Multiscale Simulation and Machine Learning Approach. Submitted to <i>Advanced Theory and Simulations</i>.</p>
+    <p><strong>Submitted:</strong> Dual Allosteric and Orthosteric Inhibition of 14-3-3ζ–α-Synuclein Interaction. Submitted to <i>Advanced Theory and Simulations</i>.</p>
   </div>
 </section>
+
 <section id="notes">
   <h2>Notes</h2>
   <div class="card">
-    <p>This section is reserved for my personal notes related to General Chemistry, Computational Chemistry, or any other topics I’m working on. I will add content here gradually.</p>
     <h3>Protein Notes</h3>
     <p>What is protein?</p>
-    <iframe src="./What_is_protein.pdf" width="100%" height="600px"></iframe>
-    <p><a href="./What_is_protein.pdf" target="_blank">Download Notes PDF</a></p>
+    <div class="responsive-iframe">
+      <iframe src="./What_is_protein.pdf" title="Protein Notes"></iframe>
+    </div>
   </div>
 </section>
 
@@ -277,7 +329,7 @@ gmx mdrun -deffnm nvt
   <h2>Education</h2>
   <div class="card">
     <h3>IIT ISM Dhanbad</h3>
-    <p>M.Sc. Chemistry (2023–2025), Thesis under Dr. Niladri Patra on protein–protein interactions.</p>
+    <p>M.Sc. Chemistry (2023–2025)</p>
   </div>
   <div class="card">
     <h3>BHU, Varanasi</h3>
@@ -289,7 +341,7 @@ gmx mdrun -deffnm nvt
   <h2>Volunteer Work</h2>
   <div class="card">
     <h3>Content Writer – Karma Jyoti (2023–2025)</h3>
-    <p>Created impactful  communication and outreach content for Karma Jyoti, a social welfare club at IIT ISM Dhanbad.</p>
+    <p>Created communication and outreach content for Karma Jyoti, a social welfare club at IIT ISM Dhanbad.</p>
   </div>
 </section>
 
@@ -302,46 +354,9 @@ gmx mdrun -deffnm nvt
 <footer>
   <p>© 2025 Aditi Chaudhary | Built with 💜</p>
 </footer>
-<!-- Back to Top Button -->
-<button id="backToTop" onclick="scrollToTop()">↑ Top</button>
-
-<script>
-  // Show button when scrolled down
-  const backToTop = document.getElementById("backToTop");
-  window.onscroll = function() {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-      backToTop.style.display = "block";
-    } else {
-      backToTop.style.display = "none";
-    }
-  };
-
-  // Scroll to top smoothly
-  function scrollToTop() {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-</script>
-
-<style>
-  #backToTop {
-    display: none; /* hidden by default */
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    z-index: 100;
-    background-color: #8A2BE2; /* deep lavender */
-    color: #fff;
-    border: none;
-    padding: 12px 16px;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: background 0.3s ease, transform 0.3s ease;
-  }
 
 <!-- Back to Top Button -->
-<button id="backToTop" onclick="scrollToTop()">↑ Top</button>
+<button id="backToTop" onclick="scrollToTop()">↑op</button>
 
 <script>
   // Back-to-top button
@@ -367,28 +382,6 @@ gmx mdrun -deffnm nvt
   }
 </script>
 
-<style>
-  #backToTop {
-    display: none; /* hidden by default */
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    z-index: 100;
-    background-color: #8A2BE2; /* deep lavender */
-    color: #fff;
-    border: none;
-    padding: 12px 16px;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: background 0.3s ease, transform 0.3s ease;
-  }
-  #backToTop:hover {
-    background-color: #ADD8E6; /* light blue on hover */
-    transform: scale(1.1);
-  }
-</style>
 </body>
 </html>
- 
+
