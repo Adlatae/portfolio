@@ -1,0 +1,467 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);color:var(--color-text-primary);font-size:14px;line-height:1.6;}
+h1{font-size:20px;font-weight:500;margin:0 0 4px;}
+h2{font-size:15px;font-weight:500;margin:24px 0 10px;padding-bottom:5px;border-bottom:0.5px solid var(--color-border-secondary);}
+h3{font-size:13px;font-weight:500;margin:14px 0 6px;color:var(--color-text-secondary);}
+p{margin:6px 0;font-size:13px;color:var(--color-text-secondary);}
+.page{padding:16px 20px 32px;}
+.subtitle{font-size:13px;color:var(--color-text-secondary);margin-bottom:20px;}
+
+/* Section cards */
+.card{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:14px 16px;margin:12px 0;}
+
+/* Term pills */
+.term{display:inline-block;background:var(--color-background-info);color:var(--color-text-info);font-size:11px;font-weight:500;padding:2px 8px;border-radius:12px;margin:1px 2px;}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0;}
+th{background:var(--color-background-secondary);font-weight:500;padding:7px 10px;text-align:left;border-bottom:0.5px solid var(--color-border-secondary);color:var(--color-text-primary);}
+td{padding:6px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+
+/* 2-col grid */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0;}
+@media(max-width:500px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+/* Stat cards */
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;text-align:center;}
+.stat-val{font-size:22px;font-weight:500;color:var(--color-text-primary);}
+.stat-label{font-size:11px;color:var(--color-text-secondary);margin-top:2px;}
+
+/* Glossary */
+.gloss-item{padding:8px 0;border-bottom:0.5px solid var(--color-border-tertiary);}
+.gloss-item:last-child{border-bottom:none;}
+.gloss-term{font-weight:500;font-size:13px;}
+.gloss-def{font-size:12px;color:var(--color-text-secondary);margin-top:2px;}
+
+/* Canvas containers */
+.canvas-wrap{border-radius:var(--border-radius-md);overflow:hidden;margin:10px 0;}
+canvas{display:block;width:100%;}
+
+/* Arrows / flow */
+.flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0;}
+.fbox{background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:6px 10px;font-size:12px;text-align:center;}
+.farrow{font-size:16px;color:var(--color-text-tertiary);}
+
+/* Color badges */
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;}
+.b-coral{background:#FAECE7;color:#993C1D;}
+.b-blue{background:#E6F1FB;color:#185FA5;}
+.b-teal{background:#E1F5EE;color:#0F6E56;}
+.b-amber{background:#FAEEDA;color:#854F0B;}
+.b-purple{background:#EEEDFE;color:#534AB7;}
+@media(prefers-color-scheme:dark){
+  .b-coral{background:#712B13;color:#F5C4B3;}
+  .b-blue{background:#0C447C;color:#B5D4F4;}
+  .b-teal{background:#085041;color:#9FE1CB;}
+  .b-amber{background:#633806;color:#FAC775;}
+  .b-purple{background:#3C3489;color:#CECBF6;}
+}
+</style>
+
+<div class="page">
+
+<h1>Crowding effects on membrane protein function</h1>
+<p class="subtitle">Visual study notes — diagrams, tables, plain-language definitions</p>
+
+<!-- ── GLOSSARY ── -->
+<h2>Key terms explained</h2>
+<div class="card">
+  <div class="gloss-item"><div class="gloss-term">Lipid bilayer <span class="badge b-blue">structure</span></div><div class="gloss-def">The double-layered "skin" of a cell — two sheets of fat molecules arranged tail-to-tail. Proteins float and slide around inside it like objects on a 2D surface.</div></div>
+  <div class="gloss-item"><div class="gloss-term">Lateral diffusion <span class="badge b-blue">movement</span></div><div class="gloss-def">Sideways movement of molecules within the membrane plane — like sliding, not jumping in or out.</div></div>
+  <div class="gloss-item"><div class="gloss-term">Gaussian diffusion <span class="badge b-teal">normal</span></div><div class="gloss-def">The "expected" random walk — each step is independent, displacement follows a bell curve. Works for dilute (uncrowded) membranes.</div></div>
+  <div class="gloss-item"><div class="gloss-term">Anomalous diffusion <span class="badge b-coral">abnormal</span></div><div class="gloss-def">Diffusion that is slower (or faster) than expected. In crowded membranes: sub-diffusion — molecules are trapped and barely progress.</div></div>
+  <div class="gloss-item"><div class="gloss-term">Multifractal <span class="badge b-purple">complex</span></div><div class="gloss-def">The movement looks irregular at every timescale, AND the type of irregularity differs from region to region (some areas more trapped, some less).</div></div>
+  <div class="gloss-item"><div class="gloss-term">Diffusion coefficient (D) <span class="badge b-blue">measure</span></div><div class="gloss-def">A number measuring how fast molecules spread. High D = fast movement. Crowding lowers D.</div></div>
+  <div class="gloss-item"><div class="gloss-term">Steric exclusion <span class="badge b-coral">mechanism</span></div><div class="gloss-def">Physical blocking — a protein cannot move into a space already occupied by another protein. Pure size-based obstruction.</div></div>
+  <div class="gloss-item"><div class="gloss-term">Sub-diffusion <span class="badge b-amber">slow</span></div><div class="gloss-def">Movement where distance covered grows slower than time. Normal: distance² ∝ time. Sub-diffusion: distance² ∝ timeᵅ where α &lt; 1.</div></div>
+  <div class="gloss-item"><div class="gloss-term">PIP₂ <span class="badge b-teal">lipid</span></div><div class="gloss-def">A specific lipid that acts as a signaling molecule. It binds tightly to some proteins (like Kir channels) and gets dragged along with them.</div></div>
+  <div class="gloss-item"><div class="gloss-term">Bending rigidity <span class="badge b-purple">mechanics</span></div><div class="gloss-def">How stiff the membrane is against bending. High rigidity = harder to curve. Crowding changes this.</div></div>
+  <div class="gloss-item"><div class="gloss-term">Depletion zone <span class="badge b-amber">region</span></div><div class="gloss-def">A thin layer near the bilayer surface where proteins are excluded by geometry — paradoxically, proteins that briefly enter this zone diffuse faster.</div></div>
+  <div class="gloss-item"><div class="gloss-term">N-linked glycans <span class="badge b-teal">protector</span></div><div class="gloss-def">Sugar chains attached to proteins. Act like a buffer zone — they physically space proteins apart, reducing crowding effects.</div></div>
+</div>
+
+<!-- ── SECTION 1: DIFFUSION ── -->
+<h2>1 — How crowding changes movement</h2>
+
+<div class="grid2">
+  <div>
+    <h3>Dilute membrane</h3>
+    <canvas id="c-dilute" height="160"></canvas>
+    <p style="text-align:center;font-size:11px;margin-top:4px;">Smooth random walk · Gaussian</p>
+  </div>
+  <div>
+    <h3>Crowded membrane</h3>
+    <canvas id="c-crowd" height="160"></canvas>
+    <p style="text-align:center;font-size:11px;margin-top:4px;">Trapped + rare escapes · non-Gaussian</p>
+  </div>
+</div>
+
+<table>
+  <tr><th>Property</th><th>Dilute membrane</th><th>Crowded membrane</th></tr>
+  <tr><td>Diffusion type</td><td><span class="badge b-teal">Normal (Gaussian)</span></td><td><span class="badge b-coral">Anomalous (multifractal)</span></td></tr>
+  <tr><td>Typical step size</td><td>Moderate, predictable</td><td>Mostly tiny, occasionally huge</td></tr>
+  <tr><td>Timescale of effect</td><td>Consistent</td><td>Nanoseconds → microseconds</td></tr>
+  <tr><td>Diffusion coefficient D</td><td>High</td><td>Lower — drops linearly with coverage</td></tr>
+  <tr><td>Displacement curve</td><td>Bell curve (symmetric)</td><td>Sharp peak + fat tails</td></tr>
+  <tr><td>Cause of slowdown</td><td>—</td><td>Steric exclusion (physical blocking)</td></tr>
+</table>
+
+<!-- Diffusion coefficient plot -->
+<h3>Diffusion coefficient vs protein coverage</h3>
+<canvas id="c-diffplot" height="180"></canvas>
+<p style="font-size:11px;color:var(--color-text-tertiary);margin-top:4px;">Linear decrease — more proteins = lower D regardless of protein size</p>
+
+<!-- ── SECTION 2: CLUSTERING ── -->
+<h2>2 — Protein clustering and sub-domains</h2>
+
+<div class="card">
+  <p>When many proteins crowd together, they spontaneously organise into <strong>clusters</strong> — local patches of high density. This creates two distinct zones in the membrane:</p>
+</div>
+
+<div class="grid2" style="margin:12px 0;">
+  <div class="card" style="border-left:3px solid #D85A30;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;">
+    <div style="font-weight:500;font-size:13px;margin-bottom:4px;">Inside cluster</div>
+    <p>Proteins and PIP₂ lipids are tightly packed. Sub-diffusion is strong. Membrane bends and becomes stiffer. Bilayer undulations are suppressed.</p>
+  </div>
+  <div class="card" style="border-left:3px solid #378ADD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;">
+    <div style="font-weight:500;font-size:13px;margin-bottom:4px;">Outside cluster</div>
+    <p>Lipids move more freely. Normal (or slightly anomalous) diffusion. Membrane is more flexible. Bending rigidity is lower.</p>
+  </div>
+</div>
+
+<canvas id="c-cluster" height="200"></canvas>
+<p style="font-size:11px;color:var(--color-text-tertiary);margin-top:4px;">Schematic: Kir channel clusters organising membrane into sub-domains</p>
+
+<table style="margin-top:12px;">
+  <tr><th>Effect of clustering</th><th>What it means</th></tr>
+  <tr><td>Sub-diffusion of proteins</td><td>Proteins inside clusters barely move — they are caged</td></tr>
+  <tr><td>Sub-diffusion of PIP₂</td><td>Signaling lipids get trapped too — affects signal timing</td></tr>
+  <tr><td>Changed bending rigidity</td><td>Membrane becomes harder/easier to curve depending on lipid type</td></tr>
+  <tr><td>Altered undulations</td><td>The natural thermal wobbling of the membrane is dampened in clusters</td></tr>
+</table>
+
+<!-- ── SECTION 3: DEPLETION ZONE ── -->
+<h2>3 — Depletion zone paradox</h2>
+
+<canvas id="c-depletion" height="160"></canvas>
+
+<div class="grid2" style="margin:10px 0;">
+  <div class="card">
+    <div class="gloss-term" style="margin-bottom:4px;">The paradox</div>
+    <p>Crowding near the bilayer surface creates a thin zone where proteins are pushed out. But proteins that briefly enter this zone actually move <em>faster</em> — not slower.</p>
+  </div>
+  <div class="card">
+    <div class="gloss-term" style="margin-bottom:4px;">Why it matters</div>
+    <p>This raises the effective concentration near the surface → promotes protein aggregation in bulk → accelerates surface diffusion for transient visitors.</p>
+  </div>
+</div>
+
+<!-- ── SECTION 4: MEMBRANE BENDING ── -->
+<h2>4 — Membrane bending and vesicle formation</h2>
+
+<div class="flow">
+  <div class="fbox">Dense ectodomains<br><span style="font-size:10px;color:var(--color-text-tertiary);">protein "heads" pack tightly</span></div>
+  <div class="farrow">→</div>
+  <div class="fbox">Steric pressure<br><span style="font-size:10px;color:var(--color-text-tertiary);">physical pushing force</span></div>
+  <div class="farrow">→</div>
+  <div class="fbox">Curvature<br><span style="font-size:10px;color:var(--color-text-tertiary);">membrane bends</span></div>
+  <div class="farrow">→</div>
+  <div class="fbox">Tubulation / budding<br><span style="font-size:10px;color:var(--color-text-tertiary);">vesicle forms</span></div>
+</div>
+
+<canvas id="c-bend" height="160"></canvas>
+
+<table style="margin-top:10px;">
+  <tr><th>Factor</th><th>Effect on curvature</th></tr>
+  <tr><td>Higher protein density</td><td>More curvature → more likely to bud off as vesicle</td></tr>
+  <tr><td>Asymmetric protein distribution</td><td>One side denser → stronger curvature force</td></tr>
+  <tr><td>Lateral confinement</td><td>Magnifies curvature effect — confined proteins push harder</td></tr>
+  <tr><td>Diffusion barriers</td><td>Trap proteins asymmetrically → lower energy cost for vesicle formation</td></tr>
+</table>
+
+<!-- ── SECTION 5: FUNCTIONAL OUTCOMES ── -->
+<h2>5 — Functional consequences</h2>
+
+<div class="grid2">
+  <div class="card" style="border-top:2px solid #639922;">
+    <div style="font-weight:500;font-size:13px;color:#3B6D11;margin-bottom:6px;">N-glycans as insulators</div>
+    <p>Sugar chains (glycans) attached to proteins act like bumpers — they physically space proteins apart, raising the crowding threshold at which diffusion slows. This <em>preserves protein activity</em> at high density.</p>
+  </div>
+  <div class="card" style="border-top:2px solid #D85A30;">
+    <div style="font-weight:500;font-size:13px;color:#993C1D;margin-bottom:6px;">Enzyme suppression</div>
+    <p>For phospholipase A₁ (an enzyme that cuts lipids): crowding speeds up vesicle fusion, which <em>deactivates</em> the enzyme. More crowding = less enzymatic activity.</p>
+  </div>
+</div>
+
+<h3>Summary: what crowding does to function</h3>
+<table>
+  <tr><th>Outcome</th><th>Direction</th><th>Mechanism</th></tr>
+  <tr><td>Protein diffusivity</td><td><span class="badge b-coral">↓ decreases</span></td><td>Steric exclusion (linear with coverage)</td></tr>
+  <tr><td>Cluster formation</td><td><span class="badge b-coral">↑ increases</span></td><td>Physical packing drives self-organisation</td></tr>
+  <tr><td>Membrane curvature</td><td><span class="badge b-coral">↑ increases</span></td><td>Steric pressure from ectodomain crowding</td></tr>
+  <tr><td>Vesicle formation energy</td><td><span class="badge b-teal">↓ easier</span></td><td>Asymmetric density lowers energetic cost</td></tr>
+  <tr><td>Signalling lipid (PIP₂) mobility</td><td><span class="badge b-coral">↓ trapped</span></td><td>Dragged along by tightly bound proteins</td></tr>
+  <tr><td>Activity with N-glycans</td><td><span class="badge b-teal">↑ preserved</span></td><td>Glycans space proteins, reduce crowding</td></tr>
+  <tr><td>Phospholipase A₁ activity</td><td><span class="badge b-coral">↓ suppressed</span></td><td>Crowding-driven vesicle fusion deactivates enzyme</td></tr>
+</table>
+
+<!-- ── BIG PICTURE ── -->
+<h2>Big picture summary</h2>
+<canvas id="c-summary" height="130"></canvas>
+
+</div>
+
+<script>
+const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const tc  = dark ? 'rgba(200,198,188,0.85)' : 'rgba(50,50,48,0.85)';
+const tc2 = dark ? 'rgba(200,198,188,0.45)' : 'rgba(50,50,48,0.45)';
+const bg2 = dark ? '#2a2a28' : '#f4f3ee';
+const bg1 = dark ? '#1e1e1c' : '#ffffff';
+const border = dark ? 'rgba(200,198,188,0.15)' : 'rgba(50,50,48,0.12)';
+
+function setup(id, h) {
+  const c = document.getElementById(id);
+  const dpr = window.devicePixelRatio||1;
+  const w = c.offsetWidth||640;
+  c.width = w*dpr; c.height = h*dpr;
+  const ctx = c.getContext('2d');
+  ctx.scale(dpr,dpr);
+  return {ctx, w, h};
+}
+
+// --- Dilute walk ---
+(function(){
+  const {ctx,w,h} = setup('c-dilute',160);
+  ctx.fillStyle=bg2; ctx.fillRect(0,0,w,h);
+  // small lipid circles scattered
+  const lc = dark?'rgba(29,158,117,0.35)':'rgba(29,158,117,0.25)';
+  [[40,30],[90,50],[150,25],[200,45],[260,30],[310,55],[360,35],[410,50],[w-40,30],
+   [60,100],[130,120],[220,95],[300,115],[380,100],[w-60,110]].forEach(([x,y])=>{
+    ctx.beginPath(); ctx.arc(x,y,6,0,Math.PI*2);
+    ctx.fillStyle=lc; ctx.fill();
+  });
+  // smooth path
+  const pts=[[80,80],[105,65],[130,80],[115,100],[95,115],[110,130],[140,120],[165,105],[185,120]];
+  ctx.beginPath(); ctx.moveTo(pts[0][0],pts[0][1]);
+  pts.slice(1).forEach(p=>ctx.lineTo(p[0],p[1]));
+  ctx.strokeStyle='#1D9E75'; ctx.lineWidth=1.5; ctx.setLineDash([3,2]); ctx.stroke(); ctx.setLineDash([]);
+  ctx.beginPath(); ctx.arc(pts[pts.length-1][0],pts[pts.length-1][1],7,0,Math.PI*2);
+  ctx.fillStyle='#0F6E56'; ctx.fill();
+  ctx.fillStyle=tc2; ctx.font=`11px var(--font-sans)`;
+  ctx.fillText('smooth steps', pts[pts.length-1][0]+10, pts[pts.length-1][1]+4);
+})();
+
+// --- Crowded walk ---
+(function(){
+  const {ctx,w,h} = setup('c-crowd',160);
+  ctx.fillStyle=bg2; ctx.fillRect(0,0,w,h);
+  // obstacles
+  [[50,40,22,14],[130,30,18,12],[220,50,24,13],[300,35,20,13],[370,45,19,12],[w-70,30,21,13],
+   [80,110,20,12],[180,120,23,14],[280,105,19,12],[350,115,22,13],[w-50,110,18,11]].forEach(([x,y,rx,ry])=>{
+    ctx.beginPath(); ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);
+    ctx.fillStyle=dark?'#3C3489':'#AFA9EC'; ctx.fill();
+  });
+  // jagged trapped path
+  const pts=[[160,75],[168,65],[162,58],[154,63],[160,75],[157,82],[164,88],[170,82],[165,75]];
+  ctx.beginPath(); ctx.moveTo(pts[0][0],pts[0][1]);
+  pts.forEach(p=>ctx.lineTo(p[0],p[1]));
+  ctx.strokeStyle='#D85A30'; ctx.lineWidth=1.5; ctx.setLineDash([2,2]); ctx.stroke(); ctx.setLineDash([]);
+  // cage box
+  ctx.strokeStyle='rgba(216,90,48,0.5)'; ctx.lineWidth=0.8; ctx.setLineDash([3,3]);
+  ctx.strokeRect(150,53,26,36); ctx.setLineDash([]);
+  // escape arrow
+  ctx.beginPath(); ctx.moveTo(176,71); ctx.lineTo(230,71);
+  ctx.strokeStyle='#D85A30'; ctx.lineWidth=2;
+  ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(226,66); ctx.lineTo(232,71); ctx.lineTo(226,76);
+  ctx.strokeStyle='#D85A30'; ctx.lineWidth=1.5; ctx.stroke();
+  ctx.beginPath(); ctx.arc(232,71,7,0,Math.PI*2);
+  ctx.fillStyle='#D85A30'; ctx.fill();
+  ctx.fillStyle=tc2; ctx.font=`11px var(--font-sans)`;
+  ctx.fillText('rare escape', 242, 75);
+  ctx.fillText('caged', 152, 50);
+})();
+
+// --- Diffusion coefficient plot ---
+(function(){
+  const {ctx,w,h} = setup('c-diffplot',180);
+  const pL=50,pR=20,pT=20,pB=44;
+  const cW=w-pL-pR, cH=h-pT-pB;
+  ctx.fillStyle=bg2; ctx.fillRect(0,0,w,h);
+  // axes
+  ctx.strokeStyle=dark?'rgba(200,198,188,0.3)':'rgba(50,50,48,0.2)';
+  ctx.lineWidth=0.8;
+  ctx.beginPath(); ctx.moveTo(pL,pT); ctx.lineTo(pL,pT+cH); ctx.lineTo(pL+cW,pT+cH); ctx.stroke();
+  // grid
+  ctx.strokeStyle=border; ctx.lineWidth=0.5;
+  [0.25,0.5,0.75,1].forEach(f=>{
+    const y=pT+cH-f*cH;
+    ctx.beginPath(); ctx.moveTo(pL,y); ctx.lineTo(pL+cW,y); ctx.stroke();
+  });
+  // linear line (D decreases with coverage)
+  ctx.beginPath(); ctx.moveTo(pL, pT+cH*0.1);
+  ctx.lineTo(pL+cW, pT+cH*0.92);
+  ctx.strokeStyle='#378ADD'; ctx.lineWidth=2; ctx.stroke();
+  // data points
+  [[0,0.88],[0.15,0.75],[0.3,0.62],[0.45,0.5],[0.6,0.37],[0.75,0.24],[0.9,0.12]].forEach(([x,y])=>{
+    ctx.beginPath(); ctx.arc(pL+x*cW, pT+cH-(y*cH*0.9+cH*0.05), 4, 0, Math.PI*2);
+    ctx.fillStyle='#378ADD'; ctx.fill();
+  });
+  // labels
+  ctx.fillStyle=tc2; ctx.font=`11px var(--font-sans)`; ctx.textAlign='center';
+  ctx.fillText('protein membrane coverage →', pL+cW/2, h-6);
+  ctx.save(); ctx.translate(13,pT+cH/2); ctx.rotate(-Math.PI/2);
+  ctx.textAlign='center'; ctx.fillText('diffusion coeff. D →', 0, 0); ctx.restore();
+  // annotation
+  ctx.fillStyle='#378ADD'; ctx.font=`500 11px var(--font-sans)`; ctx.textAlign='left';
+  ctx.fillText('linear decrease', pL+cW*0.35, pT+cH*0.45);
+})();
+
+// --- Cluster diagram ---
+(function(){
+  const {ctx,w,h} = setup('c-cluster',200);
+  ctx.fillStyle=bg2; ctx.fillRect(0,0,w,h);
+  const cx=w/2, cy=h/2;
+  // cluster circle
+  ctx.beginPath(); ctx.arc(cx,cy,70,0,Math.PI*2);
+  ctx.fillStyle=dark?'rgba(83,74,183,0.2)':'rgba(175,169,236,0.25)'; ctx.fill();
+  ctx.strokeStyle=dark?'#534AB7':'#7F77DD'; ctx.lineWidth=1; ctx.setLineDash([4,3]); ctx.stroke(); ctx.setLineDash([]);
+  // proteins inside cluster
+  [[cx-30,cy-20],[cx+10,cy-30],[cx-10,cy+10],[cx+30,cy],[cx-20,cy+30],[cx+20,cy+25]].forEach(([x,y])=>{
+    ctx.beginPath(); ctx.ellipse(x,y,14,9,0,0,Math.PI*2);
+    ctx.fillStyle=dark?'#3C3489':'#AFA9EC'; ctx.fill();
+  });
+  // PIP2 dots inside
+  [[cx-5,cy-15],[cx+25,cy-10],[cx-25,cy+15]].forEach(([x,y])=>{
+    ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2);
+    ctx.fillStyle='#1D9E75'; ctx.fill();
+  });
+  // proteins outside
+  [[cx-110,cy-60],[cx+100,cy-50],[cx-105,cy+50],[cx+105,cy+40],[cx-60,cy-100],[cx+60,cy+90]].forEach(([x,y])=>{
+    ctx.beginPath(); ctx.ellipse(x,y,14,9,0.3,0,Math.PI*2);
+    ctx.fillStyle=dark?'rgba(83,74,183,0.5)':'rgba(175,169,236,0.7)'; ctx.fill();
+  });
+  // labels
+  ctx.fillStyle=tc; ctx.font=`500 12px var(--font-sans)`; ctx.textAlign='center';
+  ctx.fillText('cluster sub-domain', cx, cy-80);
+  ctx.fillStyle=tc2; ctx.font=`11px var(--font-sans)`;
+  ctx.fillText('trapped proteins', cx, cy+55);
+  ctx.fillStyle='#1D9E75'; ctx.font=`11px var(--font-sans)`;
+  ctx.fillText('PIP₂', cx+38, cy-8);
+  ctx.fillStyle=tc2; ctx.textAlign='left';
+  ctx.fillText('free proteins', cx+115, cy+5);
+})();
+
+// --- Depletion zone ---
+(function(){
+  const {ctx,w,h} = setup('c-depletion',160);
+  ctx.fillStyle=bg2; ctx.fillRect(0,0,w,h);
+  const by=90;
+  // bilayer
+  ctx.fillStyle=dark?'rgba(29,158,117,0.3)':'rgba(29,158,117,0.2)';
+  ctx.fillRect(0,by-10,w,20);
+  ctx.strokeStyle=dark?'#1D9E75':'#0F6E56'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(0,by-10); ctx.lineTo(w,by-10); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(0,by+10); ctx.lineTo(w,by+10); ctx.stroke();
+  // depletion zone
+  ctx.fillStyle=dark?'rgba(186,117,23,0.1)':'rgba(239,159,39,0.12)';
+  ctx.fillRect(0,by-40,w,30);
+  ctx.strokeStyle=dark?'#BA7517':'#EF9F27'; ctx.lineWidth=0.7; ctx.setLineDash([3,3]);
+  ctx.beginPath(); ctx.moveTo(0,by-40); ctx.lineTo(w,by-40); ctx.stroke(); ctx.setLineDash([]);
+  // proteins above bilayer
+  [[60,50],[160,45],[260,52],[360,48],[460,50],[w-60,46]].forEach(([x,y])=>{
+    ctx.beginPath(); ctx.ellipse(x,y,18,10,0,0,Math.PI*2);
+    ctx.fillStyle=dark?'rgba(83,74,183,0.55)':'rgba(175,169,236,0.8)'; ctx.fill();
+  });
+  // fast mover in depletion zone
+  ctx.beginPath(); ctx.ellipse(200,by-22,16,9,0,0,Math.PI*2);
+  ctx.fillStyle=dark?'#D85A30':'#F0997B'; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(218,by-22); ctx.lineTo(260,by-22);
+  ctx.strokeStyle='#D85A30'; ctx.lineWidth=1.5;
+  ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(256,by-27); ctx.lineTo(262,by-22); ctx.lineTo(256,by-17);
+  ctx.strokeStyle='#D85A30'; ctx.lineWidth=1.5; ctx.stroke();
+  // labels
+  ctx.fillStyle=dark?'#BA7517':'#854F0B'; ctx.font=`500 11px var(--font-sans)`;
+  ctx.fillText('depletion zone', 10, by-44);
+  ctx.fillStyle=tc2; ctx.font=`11px var(--font-sans)`;
+  ctx.fillText('bilayer surface', 10, by+30);
+  ctx.fillStyle='#D85A30';
+  ctx.fillText('faster here!', 265, by-18);
+})();
+
+// --- Membrane bending ---
+(function(){
+  const {ctx,w,h} = setup('c-bend',160);
+  ctx.fillStyle=bg2; ctx.fillRect(0,0,w,h);
+  // flat membrane left
+  const flat_y=90;
+  ctx.strokeStyle=dark?'#1D9E75':'#0F6E56'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(20,flat_y); ctx.lineTo(w/2-30,flat_y); ctx.stroke();
+  // bent membrane right — cubic bezier curving down then up
+  ctx.beginPath();
+  ctx.moveTo(w/2+20,flat_y);
+  ctx.bezierCurveTo(w/2+60,flat_y+5, w/2+80,flat_y+30, w/2+120,flat_y+50);
+  ctx.bezierCurveTo(w/2+145,flat_y+60, w/2+155,flat_y+45, w/2+165,flat_y+20);
+  ctx.strokeStyle=dark?'#1D9E75':'#0F6E56'; ctx.lineWidth=2; ctx.stroke();
+  // arrow showing transition
+  ctx.beginPath(); ctx.moveTo(w/2-20,flat_y); ctx.lineTo(w/2+15,flat_y);
+  ctx.strokeStyle=tc2; ctx.lineWidth=1.5; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(w/2+11,flat_y-5); ctx.lineTo(w/2+17,flat_y); ctx.lineTo(w/2+11,flat_y+5);
+  ctx.strokeStyle=tc2; ctx.lineWidth=1.2; ctx.stroke();
+  // packed proteins on curved region
+  [[w/2+25,flat_y-14],[w/2+50,flat_y-10],[w/2+75,flat_y+2],[w/2+95,flat_y+18],[w/2+110,flat_y+34]].forEach(([x,y])=>{
+    ctx.beginPath(); ctx.ellipse(x,y,12,7,0,0,Math.PI*2);
+    ctx.fillStyle=dark?'rgba(83,74,183,0.55)':'rgba(175,169,236,0.8)'; ctx.fill();
+  });
+  // vesicle bud
+  ctx.beginPath(); ctx.arc(w/2+148,flat_y+40,22,0,Math.PI*2);
+  ctx.fillStyle=dark?'rgba(29,158,117,0.15)':'rgba(29,158,117,0.12)'; ctx.fill();
+  ctx.strokeStyle=dark?'#1D9E75':'#0F6E56'; ctx.lineWidth=1.5; ctx.stroke();
+  // labels
+  ctx.fillStyle=tc2; ctx.font=`11px var(--font-sans)`; ctx.textAlign='center';
+  ctx.fillText('flat', w/4, flat_y+24);
+  ctx.fillText('steric pressure', w/2+75, flat_y-25);
+  ctx.fillText('→ curvature', w/2+75, flat_y-13);
+  ctx.fillText('vesicle', w/2+148, flat_y+70);
+})();
+
+// --- Summary bar ---
+(function(){
+  const {ctx,w,h} = setup('c-summary',130);
+  ctx.fillStyle=bg2; ctx.fillRect(0,0,w,h);
+  const boxes=[
+    {label:'Crowding',sub:'more proteins',col:'#534AB7'},
+    {label:'Anomalous\ndiffusion',sub:'trapped motion',col:'#D85A30'},
+    {label:'Clustering',sub:'sub-domains',col:'#D85A30'},
+    {label:'Curvature',sub:'membrane bends',col:'#D85A30'},
+    {label:'Functional\nchanges',sub:'signalling, enzymes',col:'#0F6E56'},
+  ];
+  const bw=100, gap=(w-40-boxes.length*bw)/(boxes.length-1);
+  boxes.forEach((b,i)=>{
+    const x=20+i*(bw+gap), y=30;
+    ctx.fillStyle=b.col+'33'; ctx.strokeStyle=b.col; ctx.lineWidth=0.8;
+    ctx.beginPath();
+    ctx.roundRect ? ctx.roundRect(x,y,bw,58,6) : ctx.rect(x,y,bw,58);
+    ctx.fill(); ctx.stroke();
+    ctx.fillStyle=b.col; ctx.font=`500 12px var(--font-sans)`; ctx.textAlign='center';
+    const lines=b.label.split('\n');
+    lines.forEach((l,j)=>ctx.fillText(l, x+bw/2, y+22+j*15));
+    ctx.fillStyle=tc2; ctx.font=`10px var(--font-sans)`;
+    ctx.fillText(b.sub, x+bw/2, y+50);
+    if(i<boxes.length-1){
+      const ax=x+bw+4, ay=y+29;
+      ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(ax+gap-8,ay);
+      ctx.strokeStyle=tc2; ctx.lineWidth=1; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(ax+gap-12,ay-4); ctx.lineTo(ax+gap-6,ay); ctx.lineTo(ax+gap-12,ay+4);
+      ctx.strokeStyle=tc2; ctx.lineWidth=1; ctx.stroke();
+    }
+  });
+  ctx.fillStyle=tc2; ctx.font=`11px var(--font-sans)`; ctx.textAlign='center';
+  ctx.fillText('macromolecular crowding is a central driver of membrane organization and function', w/2, 108);
+})();
+</script>
